@@ -777,12 +777,18 @@ async function findMemberFile(memberDir) {
 
 async function findAvatar(memberDir) {
   const candidates = ["avatar.jpg", "avatar.png", "avatar.jpeg"];
+  let entries;
+  try {
+    entries = await fs.readdir(memberDir);
+  } catch {
+    return null;
+  }
   for (const name of candidates) {
-    const fullPath = path.join(memberDir, name);
-    if (await exists(fullPath)) {
+    const match = entries.find((entry) => entry.toLowerCase() === name);
+    if (match) {
       return {
-        path: fullPath,
-        ext: path.extname(fullPath).toLowerCase(),
+        path: path.join(memberDir, match),
+        ext: path.extname(name),
       };
     }
   }
