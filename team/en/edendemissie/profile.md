@@ -22,8 +22,4 @@ email = "edenataait@gmail.com"
   icon = "envelope"
   icon_pack = "fas"
   link = "mailto:edenataait@gmail.com"
-
-
-
-
 +++
